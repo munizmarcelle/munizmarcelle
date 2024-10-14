@@ -13,6 +13,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+      
+      - name: Print ref name
+        run: |
+          echo "tag: ${{github.ref_name}}"
+          echo "github.ref: ${{github.ref}}"
 
       - name: Update CHANGELOG
         id: changelog
