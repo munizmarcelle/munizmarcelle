@@ -7,7 +7,41 @@ on:
   workflow_dispatch: 
 
 jobs:
+
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{steps.push-tag.outputs.tag}}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions-ecosystem/action-release-label@v1
+        id: release-label
+        if: ${{github.event.pull_request.merged == true}}
+
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+        if: ${{steps.release-label.outputs.level != null}}
+
+      - uses: actions-ecosystem/action-bump-semver@v1
+        id: bump-semver
+        if: ${{steps.release-label.outputs.level != null}}
+        with:
+          current_version: ${{steps.get-latest-tag.outputs.tag}}
+          level: ${{steps.release-label.outputs.level}}
+
+      - uses: actions-ecosystem/action-push-tag@v1
+        id: push-tag
+        if: ${{steps.release-label.outputs.level != null}}
+        with:
+          tag: ${{steps.bump-semver.outputs.new_version}}
+          message: '${{steps.bump-semver.outputs.new_version}}: \n PR #${{github.event.pull_request.number}} ${{github.event.pull_request.title}}'
+        
+      - name: get-latest-tag
+        run: echo "Latest tag is ${{steps.get-latest-tag.outputs.tag}}"
+          
   deploy:
+    needs: release
     runs-on: ubuntu-latest
 
     steps:
@@ -16,15 +50,17 @@ jobs:
       
       - name: Print ref name
         run: |
-          echo "tag: ${{github.ref_name}}"
+          echo "branch: ${{github.ref_name}}"
           echo "github.ref: ${{github.ref}}"
+          echo "tag: ${{needs.release.outputs.tag}}"
 
       - name: Update CHANGELOG
         id: changelog
         uses: requarks/changelog-action@v1
         with:
-          token: ${{ github.token }}
-          tag: ${{ github.ref_name }}
+          token: ${{github.token}}
+          tag: ${{needs.release.outputs.tag}}
+          writeToFile: true
 
       - name: Create Release
         uses: ncipollo/release-action@v1.12.0
@@ -32,13 +68,13 @@ jobs:
           allowUpdates: true
           draft: false
           makeLatest: true
-          name: ${{ github.ref_name }}
-          body: ${{ steps.changelog.outputs.changes }}
-          token: ${{ github.token }}
+          name: ${{github.ref_name}}
+          body: ${{steps.changelog.outputs.changes}}
+          token: ${{github.token}}
 
       - name: Commit CHANGELOG.md
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           branch: main
-          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
+          commit_message: 'docs: update CHANGELOG.md for ${{github.ref_name}} [skip ci]'
           file_pattern: CHANGELOG.md
