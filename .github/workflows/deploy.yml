@@ -35,6 +35,8 @@ jobs:
         with:
           tag: ${{steps.bump-semver.outputs.new_version}}
           message: '${{steps.bump-semver.outputs.new_version}}: \n PR #${{github.event.pull_request.number}} ${{github.event.pull_request.title}}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: get-latest-tag
         run: echo "Latest tag is ${{steps.get-latest-tag.outputs.tag}}"
