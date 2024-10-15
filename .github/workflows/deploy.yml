@@ -26,7 +26,7 @@ jobs:
         id: bump-semver
         with:
           current_version: ${{steps.get-latest-tag.outputs.tag}}
-          level: ${{steps.release-label.outputs.level}}
+          level: 'patch' # ${{steps.release-label.outputs.level}}
 
       - uses: actions-ecosystem/action-push-tag@v1
         with:
