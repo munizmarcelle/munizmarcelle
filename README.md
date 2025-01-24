@@ -36,7 +36,7 @@
 
 ###
 
-- 👋 Hi, I’m Marcelle Muniz. Slack alias: @munizao
+- 👋 Hi, I’m Marcello Muniz. Slack alias: @munizao
 - 👀 I’m interested in technology, art, good music, nature and animals
 - 🌱 I am currently interested in AI, especially related to apply AI in QA
 - 💞️ I’m looking to collaborate on QA community
