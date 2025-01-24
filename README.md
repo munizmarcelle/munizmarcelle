@@ -1,4 +1,4 @@
-<h2 align="left">Hi 👋! My name is Marcelle and I'm a Staff QA Engineer, from São Paulo - SP.</h2>
+<h2 align="left">Hi 👋! My name is Marcello and I'm a Staff QA Engineer, from São Paulo - SP.</h2>
 
 ###
 
