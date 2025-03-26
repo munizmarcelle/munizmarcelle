@@ -1,4 +1,4 @@
-<h2 align="left">Hi 👋! My name is Marcello and I'm a Staff QA Engineer, from São Paulo - SP.</h2>
+<h2 align="left">Hi 👋! My name is Marcello and I'm a Sr. Staff QA Engineer, from São Paulo - SP.</h2>
 
 ###
 
@@ -36,14 +36,14 @@
 
 ###
 
-- 👋 Hi, I’m Marcello Muniz. Slack alias: @munizao
+- 👋 Hi, I’m Marcello Muniz.
 - 👀 I’m interested in technology, art, good music, nature and animals
 - 🌱 I am currently interested in AI, especially related to apply AI in QA
 - 💞️ I’m looking to collaborate on QA community
-- 📫 How to reach me:   +55 (11) 98527-3771 (Whatsapp)
+- 📫 How to reach me: +55 (11) 98527-3771 (Whatsapp)
 
 
 <!---
-munizmarcelle/munizmarcelle is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+munizmarcello/munizmarcello is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.
 --->
